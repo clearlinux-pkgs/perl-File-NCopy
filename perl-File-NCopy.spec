@@ -4,31 +4,41 @@
 #
 Name     : perl-File-NCopy
 Version  : 0.36
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/File-NCopy-0.36.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/File-NCopy-0.36.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-ncopy-perl/libfile-ncopy-perl_0.36-2.debian.tar.xz
 Summary  : Deprecated module. Use File::Copy::Recursive instead. Copy file, file. Copy file[s] | dir[s], dir
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
-Requires: perl-File-NCopy-man
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-File-NCopy-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 No detailed description available
 
-%package man
-Summary: man components for the perl-File-NCopy package.
+%package dev
+Summary: dev components for the perl-File-NCopy package.
+Group: Development
+Provides: perl-File-NCopy-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-File-NCopy package.
+
+
+%package license
+Summary: license components for the perl-File-NCopy package.
 Group: Default
 
-%description man
-man components for the perl-File-NCopy package.
+%description license
+license components for the perl-File-NCopy package.
 
 
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n File-NCopy-0.36
-mkdir -p %{_topdir}/BUILD/File-NCopy-0.36/deblicense/
+cd ..
+%setup -q -T -D -n File-NCopy-0.36 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-NCopy-0.36/deblicense/
 
 %build
@@ -53,10 +63,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-NCopy
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-NCopy/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -65,8 +77,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/File/NCopy.pm
+/usr/lib/perl5/vendor_perl/5.26.1/File/NCopy.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/File::NCopy.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-File-NCopy/deblicense_copyright
