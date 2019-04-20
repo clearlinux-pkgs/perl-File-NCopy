@@ -4,7 +4,7 @@
 #
 Name     : perl-File-NCopy
 Version  : 0.36
-Release  : 9
+Release  : 10
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/File-NCopy-0.36.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/File-NCopy-0.36.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-ncopy-perl/libfile-ncopy-perl_0.36-2.debian.tar.xz
@@ -21,6 +21,7 @@ No detailed description available
 Summary: dev components for the perl-File-NCopy package.
 Group: Development
 Provides: perl-File-NCopy-devel = %{version}-%{release}
+Requires: perl-File-NCopy = %{version}-%{release}
 
 %description dev
 dev components for the perl-File-NCopy package.
@@ -39,7 +40,7 @@ license components for the perl-File-NCopy package.
 cd ..
 %setup -q -T -D -n File-NCopy-0.36 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-NCopy-0.36/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-NCopy-0.36/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
