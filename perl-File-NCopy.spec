@@ -4,7 +4,7 @@
 #
 Name     : perl-File-NCopy
 Version  : 0.36
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/File-NCopy-0.36.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/File-NCopy-0.36.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-ncopy-perl/libfile-ncopy-perl_0.36-2.debian.tar.xz
@@ -76,7 +76,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-NCopy
-cp %{_builddir}/File-NCopy-0.36/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-NCopy/05eed01407d02f3b247b8de9f02ba574a41bb0f6
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-File-NCopy/05eed01407d02f3b247b8de9f02ba574a41bb0f6
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -100,4 +100,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/File/NCopy.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/NCopy.pm
