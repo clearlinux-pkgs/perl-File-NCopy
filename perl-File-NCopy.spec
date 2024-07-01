@@ -5,7 +5,7 @@
 #
 Name     : perl-File-NCopy
 Version  : 0.36
-Release  : 26
+Release  : 27
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/File-NCopy-0.36.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/File-NCopy-0.36.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-ncopy-perl/libfile-ncopy-perl_0.36-2.debian.tar.xz
